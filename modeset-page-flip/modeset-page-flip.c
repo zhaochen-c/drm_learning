@@ -1,11 +1,11 @@
 #define _GUN_SOURCE
-#include <xf86drm.h>
-#include <xf86drmMode.h>
+#include <fcntl.h>
+#include <signal.h>
 #include <stdint.h>
 #include <sys/mman.h>
 #include <unistd.h>
-#include <signal.h>
-#include <fcntl.h>
+#include <xf86drm.h>
+#include <xf86drmMode.h>
 
 struct buffer_object {
     uint32_t width;
@@ -35,7 +35,7 @@ static int modeset_create_fb(int fd, struct buffer_object *bo, uint32_t color)
     bo->size = create.size;
     bo->handle = create.handle;
     drmModeAddFB(fd, bo->width, bo->height, 24, 32, bo->pitch, bo->handle, &bo->fb_id);
-    
+
     map.handle = create.handle;
     drmIoctl(fd, DRM_IOCTL_MODE_MAP_DUMB, &map);
 
@@ -62,8 +62,8 @@ static void modeset_destroy_fb(int fd, struct buffer_object *bo)
 
 static void modeset_page_flip_handler(int fd, uint32_t frame, uint32_t sec, uint32_t usec, void *data)
 {
-    static int i =0;
-    uint32_t crtc_id = *(uint32_t*)data;
+    static int i = 0;
+    uint32_t crtc_id = *(uint32_t *)data;
 
     i ^= 1;
 
@@ -103,8 +103,8 @@ int main(int argc, char **argv)
     buf[1].width = conn->modes[0].hdisplay;
     buf[1].height = conn->modes[0].vdisplay;
 
-	modeset_create_fb(fd, &buf[0], 0xff0000);
-	modeset_create_fb(fd, &buf[1], 0x0000ff);
+    modeset_create_fb(fd, &buf[0], 0xff0000);
+    modeset_create_fb(fd, &buf[1], 0x0000ff);
 
     drmModeSetCrtc(fd, crtc_id, buf[0].fb_id, 0, 0, &conn_id, 1, &conn->modes[0]);
 

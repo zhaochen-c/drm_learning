@@ -1,12 +1,11 @@
 #define _GUN_SOURCE
+#include <fcntl.h>
 #include <stdint.h>
+#include <stdio.h>
+#include <sys/mman.h>
+#include <unistd.h>
 #include <xf86drm.h>
 #include <xf86drmMode.h>
-#include <sys/mman.h>
-#include <stdio.h>
-#include <fcntl.h>
-#include <unistd.h>
-
 
 struct buffer_object {
     uint32_t width;

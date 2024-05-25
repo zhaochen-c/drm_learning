@@ -1,12 +1,12 @@
 #define _GNU_SOURCE
+#include <fcntl.h>
 #include <stdint.h>
+#include <stdio.h>
+#include <string.h>
+#include <sys/mman.h>
+#include <unistd.h>
 #include <xf86drm.h>
 #include <xf86drmMode.h>
-#include <fcntl.h>
-#include <sys/mman.h>
-#include <string.h>
-#include <unistd.h>
-#include <stdio.h>
 
 struct buffer_object {
     uint32_t width;
@@ -69,7 +69,7 @@ int main(int argc, char **argv)
     uint32_t plane_id;
 
     fd = open("/dev/dri/card0", O_RDWR | O_CLOEXEC);
-    
+
     res = drmModeGetResources(fd);
     crtc_id = res->crtcs[0];
     conn_id = res->connectors[0];

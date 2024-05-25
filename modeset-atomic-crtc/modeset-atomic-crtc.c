@@ -1,12 +1,12 @@
 #define __GNU_SOURCE
+#include <fcntl.h>
 #include <stdint.h>
+#include <stdio.h>
+#include <string.h>
+#include <sys/mman.h>
+#include <unistd.h>
 #include <xf86drm.h>
 #include <xf86drmMode.h>
-#include <fcntl.h>
-#include <sys/mman.h>
-#include <string.h>
-#include <unistd.h>
-#include <stdio.h>
 
 struct buffer_object {
     uint32_t width;
