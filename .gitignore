@@ -1,2 +1,5 @@
 # vscode settings
 .vscode
+
+#clangd
+.clangd-format
