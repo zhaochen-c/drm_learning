@@ -2,4 +2,4 @@
 .vscode
 
 #clangd
-.clangd-format
+.clang-format
