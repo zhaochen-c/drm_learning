@@ -383,7 +383,7 @@ static void modeset_draw(int fd)
             if (ret)
                 fprintf(stderr, "cannot flip CRTC for connector %u (%d): %m\n", iter->conn, errno);
             else
-                iter->front_buf ^ 1;
+                iter->front_buf ^= 1;
         }
 
         usleep(100000);
